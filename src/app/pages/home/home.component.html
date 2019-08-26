@@ -27,6 +27,7 @@
                 [longitude]="lng"
                 [(zoom)]="zoom"
                 [usePanning]="true"
+                [clickableIcons]="false"
                 (mapClick)="mapClicked($event)"
             >
                 <ng-container *ngIf="markers$ | async as markers">
