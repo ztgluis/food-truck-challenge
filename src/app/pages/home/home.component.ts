@@ -37,7 +37,6 @@ export class HomeComponent {
     ) {
         // initialize map values
         this.reset();
-        this.findMe();
     }
 
     // resets map values to initial defaults

@@ -2,15 +2,33 @@
     <mat-card>
         <mat-card-title>San Francisco Food Trucks</mat-card-title>
         <mat-card-subtitle>
-            To start, enable access to your device location or click your
-            current position in the map.
-            <strong>
-                The Reset button will set the map location to San Francisco.
-            </strong>
+            We'll find the five closest food trucks to you in San Francisco! To
+            start, enable access to your device location or click your current
+            position in the map.
         </mat-card-subtitle>
         <mat-card-subtitle>
-            <button mat-raised-button color="primary" (click)="reset()">
+            <strong>
+                The Reset button will set the map to Initial State.
+            </strong>
+        </mat-card-subtitle>
+        <mat-card-subtitle class="">
+            <button
+                class="mx-2"
+                mat-raised-button
+                color="primary"
+                (click)="reset()"
+                matTooltip="Reset map to Initial State"
+            >
                 Reset
+            </button>
+            <button
+                class="mx-2"
+                mat-raised-button
+                color="primary"
+                (click)="findMe()"
+                matTooltip="Use location services to find your current location"
+            >
+                Find Me
             </button>
             <span class="mx-2">Latitude: {{ lat }}, Longitude: {{ lng }}</span>
             <mat-spinner
