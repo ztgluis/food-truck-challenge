@@ -113,9 +113,13 @@ A demo of this project can be found here: https://ztgluis.github.io/food-truck-c
 
 # Development
 
+For development, clone this repository in your local environment and run `npm install`
+
 Run `npm start` for a dev server and navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
 Run `npm test` to run tests and get a text summary of the results + code coverage.
+
+Run `npm run tests:dev` to run tests in watch mode, allowing to debug issues and live rerun the test on code changes.
 
 Running `git commit` will initiate a pre-commit hook which will ensure code styling using prettier.
 
