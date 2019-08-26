@@ -124,3 +124,7 @@ Run `npm run tests:dev` to run tests in watch mode, allowing to debug issues and
 Running `git commit` will initiate a pre-commit hook which will ensure code styling using prettier.
 
 Running `git push` will initiate a CI/CD process which executes linting, testing, prod build and push prod build to GitHub Pages.
+
+# Roadmap
+
+Next step for this project is to include automated deployments to Azure, GCP and AWS as part of the CI/CD process.
