@@ -139,17 +139,9 @@ THE SOFTWARE.
 
 @angular/material/card
 
-@angular/material/core
-
 @angular/material/icon
 
-@angular/material/list
-
-@angular/material/menu
-
 @angular/material/progress-spinner
-
-@angular/material/sidenav
 
 @angular/material/snack-bar
 
