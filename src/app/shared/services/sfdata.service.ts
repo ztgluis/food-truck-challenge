@@ -7,8 +7,6 @@ import { Observable } from 'rxjs';
 })
 export class SFDataService {
     dataUrl = 'https://data.sfgov.org/resource/rqzj-sfat.json';
-    latitude;
-    longitude;
 
     constructor(private http: HttpClient) {}
 
