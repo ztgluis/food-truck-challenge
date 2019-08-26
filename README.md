@@ -57,8 +57,6 @@ Angular Flex Layout is used to enable mobile responsive design.
 
 Depending on the viewport size, elements are effectively added or removed from the DOM, this keeps the DOM clean and organized while also boosting performance.
 
-The navigation Layout can also be changed programmatically using Angular Flex Layout. Allowing us to force the default Layout view instead of the sidenav panel view when on small screens.
-
 ## Angular Google Maps
 
 Angular Google Maps is used as a wrapper to use the Google Maps API's.

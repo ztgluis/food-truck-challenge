@@ -40,30 +40,11 @@ describe('AppComponent', () => {
         expect(component).toBeTruthy();
     });
 
-    describe('switchLayout()', () => {
-        it('should switch the layout', async(() => {
-            fixture.detectChanges();
-            expect(component.sidenavLayout).toBeFalsy();
-            component.switchLayout();
-            expect(component.sidenavLayout).toBeTruthy();
-            expect(settingsServiceSpy.setLayout).toHaveBeenCalled();
-        }));
-    });
-
     describe('switchTheme()', () => {
         it('should switch the theme', async(() => {
             fixture.detectChanges();
             component.switchTheme();
             expect(settingsServiceSpy.switchTheme).toHaveBeenCalled();
-        }));
-    });
-
-    describe('toggleSidenavText()', () => {
-        it('should expand the sidenav menu', async(() => {
-            fixture.detectChanges();
-            expect(component.expandedSidenav).toBeFalsy();
-            component.toggleSidenavText();
-            expect(component.expandedSidenav).toBeTruthy();
         }));
     });
 });

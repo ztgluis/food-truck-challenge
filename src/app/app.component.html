@@ -19,31 +19,29 @@
         <!-- Toolbar Buttons -->
         <div class="ml-auto">
             <!-- Layout Based Navigation-->
-            <ng-container *ngIf="!sidenavLayout">
-                <button
-                    *ngFor="let link of navLinks"
-                    mat-button
-                    [matTooltip]="link.name"
-                    [routerLink]="link.path"
-                    [routerLinkActiveOptions]="{ exact: true }"
-                    routerLinkActive="bg-accent"
-                >
-                    <!-- Responsive Navigation Items -->
-                    <div
-                        *ngIf="
-                            mediaObserver.isActive('gt-sm');
-                            then navItems;
-                            else responsiveNavItems
-                        "
-                    ></div>
-                    <ng-template #navItems>
-                        <span>{{ link.name }}</span>
-                    </ng-template>
-                    <ng-template #responsiveNavItems>
-                        <mat-icon>{{ link.icon }}</mat-icon>
-                    </ng-template>
-                </button>
-            </ng-container>
+            <button
+                *ngFor="let link of navLinks"
+                mat-button
+                [matTooltip]="link.name"
+                [routerLink]="link.path"
+                [routerLinkActiveOptions]="{ exact: true }"
+                routerLinkActive="bg-accent"
+            >
+                <!-- Responsive Navigation Items -->
+                <div
+                    *ngIf="
+                        mediaObserver.isActive('gt-sm');
+                        then navItems;
+                        else responsiveNavItems
+                    "
+                ></div>
+                <ng-template #navItems>
+                    <span>{{ link.name }}</span>
+                </ng-template>
+                <ng-template #responsiveNavItems>
+                    <mat-icon>{{ link.icon }}</mat-icon>
+                </ng-template>
+            </button>
 
             <!-- Responsive Settings Menu -->
             <div
@@ -53,46 +51,15 @@
                     else responsiveSettingsMenu
                 "
             ></div>
-            <ng-template #settingsMenu>
-                <div class="d-inline-block">
-                    <button
-                        mat-icon-button
-                        (click)="switchLayout()"
-                        matTooltip="Switch Layout"
-                    >
-                        <mat-icon>web_asset</mat-icon>
-                    </button>
-                    <button
-                        mat-icon-button
-                        (click)="switchTheme()"
-                        matTooltip="Switch Theme"
-                    >
-                        <mat-icon>color_lens</mat-icon>
-                    </button>
-                </div>
-            </ng-template>
-            <ng-template #responsiveSettingsMenu>
+            <div class="d-inline-block">
                 <button
-                    class="d-inline-block"
                     mat-icon-button
-                    [matMenuTriggerFor]="settingsMenu"
-                    matTooltip="Settings"
+                    (click)="switchTheme()"
+                    matTooltip="Switch Theme"
                 >
-                    <mat-icon>settings</mat-icon>
-                    <mat-menu #settingsMenu="matMenu">
-                        <ng-template matMenuContent>
-                            <button mat-menu-item (click)="switchLayout()">
-                                <mat-icon>web_asset</mat-icon>
-                                <span>Layout</span>
-                            </button>
-                            <button mat-menu-item (click)="switchTheme()">
-                                <mat-icon>color_lens</mat-icon>
-                                <span>Theme</span>
-                            </button>
-                        </ng-template>
-                    </mat-menu>
+                    <mat-icon>color_lens</mat-icon>
                 </button>
-            </ng-template>
+            </div>
 
             <!-- Github link -->
             <a
@@ -104,32 +71,7 @@
         </div>
     </mat-toolbar>
 
-    <!-- Sidenav Container -->
-    <mat-sidenav-container class="sidenav-container" autosize>
-        <!-- Navigation Sidenav -->
-        <mat-sidenav class="sidenav" mode="side" [opened]="sidenavLayout">
-            <mat-nav-list>
-                <mat-list-item (click)="toggleSidenavText()" disableRipple>
-                    <mat-icon class="ml-auto">
-                        {{ expandedSidenav ? 'chevron_left' : 'chevron_right' }}
-                    </mat-icon>
-                </mat-list-item>
-                <mat-list-item
-                    *ngFor="let link of navLinks"
-                    [routerLink]="link.path"
-                    routerLinkActive="bg-accent"
-                >
-                    <mat-icon matListIcon>{{ link.icon }}</mat-icon>
-                    <h3 matLine *ngIf="expandedSidenav">{{ link.name }}</h3>
-                </mat-list-item>
-            </mat-nav-list>
-        </mat-sidenav>
-
-        <!-- Main Content -->
-        <mat-sidenav-content role="main">
-            <router-outlet></router-outlet>
-        </mat-sidenav-content>
-    </mat-sidenav-container>
+    <router-outlet></router-outlet>
 
     <!-- Footer -->
     <mat-toolbar color="primary">

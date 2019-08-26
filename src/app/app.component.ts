@@ -6,7 +6,6 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { getAppNav } from '@app/app.routing';
 import { SettingsService } from '@app/shared/services/settings.service';
 import { Observable } from 'rxjs';
-import { tap } from 'rxjs/operators';
 
 @Component({
     selector: 'ftc-root',
@@ -34,36 +33,11 @@ export class AppComponent {
 
     mediaObserver$: Observable<
         MediaChange[]
-    > = this.mediaObserver.asObservable().pipe(
-        tap(() => {
-            // Force default layout on small responsive view
-            const sidenav = this.settingsService.getLayout();
-            if (sidenav) {
-                if (this.mediaObserver.isActive('lt-sm')) {
-                    this.sidenavLayout = false;
-                } else {
-                    this.sidenavLayout = true;
-                }
-            }
-        })
-    );
-
-    sidenavLayout = this.settingsService.getLayout();
-
-    expandedSidenav = false;
+    > = this.mediaObserver.asObservable();
 
     navLinks = getAppNav();
 
-    switchLayout() {
-        this.sidenavLayout = !this.sidenavLayout;
-        this.settingsService.setLayout(this.sidenavLayout);
-    }
-
     switchTheme() {
         this.settingsService.switchTheme();
-    }
-
-    toggleSidenavText() {
-        this.expandedSidenav = !this.expandedSidenav;
     }
 }
