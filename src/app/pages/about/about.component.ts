@@ -51,16 +51,22 @@ export class AboutComponent {
 
     devFeatures = [
         {
-            name: 'prettier',
-            title: 'Prettier',
+            name: 'cicd',
+            title: 'CI/CD',
             description:
-                'Prettier is set up as a dev dependency to ensure consistent formatting of the code.'
+                'CI/CD is integrated as part of this repository, as a pre-requisite to commiting changes, all staged files will get code styling rules applied through Prettier. As a pre-requisite to pushing changes to Github, a series of checks will run which include: all linting rules must pass, all tests must pass, a minimun of 80% threshold on code coverage is achieved, a prod build completes successfully and a copy of the compiled webpage is pushed to Github Pages.'
         },
         {
             name: 'husky',
             title: 'Husky',
             description:
-                'Husky is used to add development cycle hooks, such as running prettier on committing changes or publish to Github Pages on pushing updates.'
+                'Husky is used to add development cycle hooks, such as pre-commit and pre-push hooks used for the CI/CD process.'
+        },
+        {
+            name: 'prettier',
+            title: 'Prettier',
+            description:
+                'Prettier is set up as a dev dependency to ensure consistent formatting of the code.'
         },
         {
             name: 'tslint',
