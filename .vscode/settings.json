@@ -1,0 +1,8 @@
+{
+    "editor.detectIndentation": false,
+    "editor.codeActionsOnSave": {
+        "source.fixAll.tslint": true,
+        "source.organizeImports": true
+    },
+    "editor.formatOnSave": true
+}

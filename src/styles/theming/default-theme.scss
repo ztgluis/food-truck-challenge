@@ -1,0 +1,14 @@
+@import '~@angular/material/theming';
+
+$primary-palette: mat-palette($mat-blue);
+$accent-palette: mat-palette($mat-deep-purple);
+$warn-palette: mat-palette($mat-red);
+
+$info-palette: mat-palette($mat-pink);
+$success-palette: mat-palette($mat-green);
+$neutral-palette: mat-palette($mat-blue-gray);
+$light-palette: mat-palette($mat-gray, 100);
+
+$theme: mat-light-theme($primary-palette, $accent-palette, $warn-palette);
+
+@import 'build-theme';

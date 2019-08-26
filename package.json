@@ -1,0 +1,70 @@
+{
+    "name": "food-truck-challenge",
+    "version": "1.0.0",
+    "private": true,
+    "scripts": {
+        "ng": "ng",
+        "preinstall": "rm -rf node_modules",
+        "start": "ng serve",
+        "build": "ng build",
+        "build:prod": "ng build --prod",
+        "test": "ng test --code-coverage --browsers ChromeHeadless --watch=false",
+        "test:dev": "ng test --code-coverage",
+        "lint": "ng lint food-truck-challenge",
+        "lint:fix": "ng lint food-truck-challenge --fix",
+        "e2e": "ng e2e",
+        "prettier": "pretty-quick --staged",
+        "gh-pages": "ng build --prod --base-href /food-truck-challenge/ && npx angular-cli-ghpages"
+    },
+    "husky": {
+        "hooks": {
+            "pre-commit": "npm run prettier",
+            "pre-push": "npm run lint && npm run test && npm run gh-pages"
+        }
+    },
+    "dependencies": {
+        "@agm/core": "^1.0.0-beta.7",
+        "@angular/animations": "8.2.2",
+        "@angular/cdk": "8.1.3",
+        "@angular/common": "8.2.2",
+        "@angular/compiler": "8.2.2",
+        "@angular/core": "8.2.2",
+        "@angular/flex-layout": "8.0.0-beta.26",
+        "@angular/forms": "8.2.2",
+        "@angular/material": "8.1.3",
+        "@angular/platform-browser": "8.2.2",
+        "@angular/platform-browser-dynamic": "8.2.2",
+        "@angular/router": "8.2.2",
+        "bootstrap": "4.3.1",
+        "hammerjs": "2.0.8",
+        "rxjs": "6.5.2",
+        "zone.js": "0.10.2"
+    },
+    "devDependencies": {
+        "@angular-devkit/build-angular": "0.802.1",
+        "@angular/cli": "8.2.1",
+        "@angular/compiler-cli": "8.2.2",
+        "@angular/language-service": "8.2.2",
+        "@types/jasmine": "3.4.0",
+        "@types/jasminewd2": "2.0.6",
+        "@types/node": "12.7.1",
+        "angular-cli-ghpages": "0.6.0-rc.2",
+        "codelyzer": "5.1.0",
+        "husky": "3.0.3",
+        "jasmine-core": "3.4.0",
+        "jasmine-spec-reporter": "4.2.1",
+        "karma": "4.2.0",
+        "karma-chrome-launcher": "3.1.0",
+        "karma-coverage-istanbul-reporter": "2.1.0",
+        "karma-jasmine": "2.0.1",
+        "karma-jasmine-html-reporter": "1.4.2",
+        "prettier": "1.18.2",
+        "pretty-quick": "1.11.1",
+        "protractor": "5.4.2",
+        "ts-node": "8.3.0",
+        "tslint": "5.18.0",
+        "tslint-config-airbnb": "5.11.1",
+        "tslint-config-prettier": "1.18.0",
+        "typescript": "3.4.5"
+    }
+}

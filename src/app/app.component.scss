@@ -1,0 +1,24 @@
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    min-height: 100%;
+}
+.sidenav-container {
+    flex: 1;
+    // height: calc(100% - 64px); // 64px for each toolbar (header and footer)
+}
+
+// Remove gap between top toolbar and nav menu items
+.mat-nav-list {
+    padding-top: 0;
+
+    // Balance text position in sidenav
+    h3 {
+        margin-right: 4px;
+    }
+}
+
+// Properly align menu icon with nav icons
+.mat-toolbar-single-row {
+    padding: 0 13px;
+}

@@ -1,0 +1,28 @@
+<div class="page-container">
+    <mat-card>
+        <mat-card-title>Introduction</mat-card-title>
+        <mat-card-content>
+            <p>
+                This project is a coding challenge with the objective to help
+                anyone in San Francisco find the five closest food trucks to
+                them.
+            </p>
+        </mat-card-content>
+    </mat-card>
+
+    <mat-card>
+        <mat-card-title>Features</mat-card-title>
+        <div *ngFor="let feature of features" class="my-4">
+            <mat-card-subtitle>{{ feature.title }}</mat-card-subtitle>
+            <mat-card-content>{{ feature.description }}</mat-card-content>
+        </div>
+    </mat-card>
+
+    <mat-card>
+        <mat-card-title>Development</mat-card-title>
+        <div *ngFor="let feature of devFeatures" class="my-4">
+            <mat-card-subtitle>{{ feature.title }}</mat-card-subtitle>
+            <mat-card-content>{{ feature.description }}</mat-card-content>
+        </div>
+    </mat-card>
+</div>

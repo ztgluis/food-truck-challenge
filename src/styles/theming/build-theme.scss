@@ -1,0 +1,11 @@
+/**
+ * All theme files need to import this file at the end
+ * This file generates the css output needed for themes
+ */
+
+/* Imports bootstrap and generates the styles */
+@import '~styles/theming/bootstrap';
+
+/* Generate the material styles */
+@include mat-core();
+@include angular-material-theme($theme);

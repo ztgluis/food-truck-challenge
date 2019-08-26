@@ -1,0 +1,144 @@
+<div class="wrapper" *ngIf="mediaObserver$ | async">
+    <!-- Header -->
+    <mat-toolbar color="primary">
+        <!-- Responsive Title -->
+        <div
+            *ngIf="
+                mediaObserver.isActive('gt-xs');
+                then title;
+                else responsiveTitle
+            "
+        ></div>
+        <ng-template #title>
+            <button mat-button [routerLink]="['/']">Food Truck Finder</button>
+        </ng-template>
+        <ng-template #responsiveTitle>
+            <button mat-button [routerLink]="['/']">FTF</button>
+        </ng-template>
+
+        <!-- Toolbar Buttons -->
+        <div class="ml-auto">
+            <!-- Layout Based Navigation-->
+            <ng-container *ngIf="!sidenavLayout">
+                <button
+                    *ngFor="let link of navLinks"
+                    mat-button
+                    [matTooltip]="link.name"
+                    [routerLink]="link.path"
+                    [routerLinkActiveOptions]="{ exact: true }"
+                    routerLinkActive="bg-accent"
+                >
+                    <!-- Responsive Navigation Items -->
+                    <div
+                        *ngIf="
+                            mediaObserver.isActive('gt-sm');
+                            then navItems;
+                            else responsiveNavItems
+                        "
+                    ></div>
+                    <ng-template #navItems>
+                        <span>{{ link.name }}</span>
+                    </ng-template>
+                    <ng-template #responsiveNavItems>
+                        <mat-icon>{{ link.icon }}</mat-icon>
+                    </ng-template>
+                </button>
+            </ng-container>
+
+            <!-- Responsive Settings Menu -->
+            <div
+                *ngIf="
+                    mediaObserver.isActive('gt-sm');
+                    then settingsMenu;
+                    else responsiveSettingsMenu
+                "
+            ></div>
+            <ng-template #settingsMenu>
+                <div class="d-inline-block">
+                    <button
+                        mat-icon-button
+                        (click)="switchLayout()"
+                        matTooltip="Switch Layout"
+                    >
+                        <mat-icon>web_asset</mat-icon>
+                    </button>
+                    <button
+                        mat-icon-button
+                        (click)="switchTheme()"
+                        matTooltip="Switch Theme"
+                    >
+                        <mat-icon>color_lens</mat-icon>
+                    </button>
+                </div>
+            </ng-template>
+            <ng-template #responsiveSettingsMenu>
+                <button
+                    class="d-inline-block"
+                    mat-icon-button
+                    [matMenuTriggerFor]="settingsMenu"
+                    matTooltip="Settings"
+                >
+                    <mat-icon>settings</mat-icon>
+                    <mat-menu #settingsMenu="matMenu">
+                        <ng-template matMenuContent>
+                            <button mat-menu-item (click)="switchLayout()">
+                                <mat-icon>web_asset</mat-icon>
+                                <span>Layout</span>
+                            </button>
+                            <button mat-menu-item (click)="switchTheme()">
+                                <mat-icon>color_lens</mat-icon>
+                                <span>Theme</span>
+                            </button>
+                        </ng-template>
+                    </mat-menu>
+                </button>
+            </ng-template>
+
+            <!-- Github link -->
+            <a
+                mat-icon-button
+                href="https://github.com/ztgluis/food-truck-challenge"
+            >
+                <mat-icon svgIcon="github"></mat-icon>
+            </a>
+        </div>
+    </mat-toolbar>
+
+    <!-- Sidenav Container -->
+    <mat-sidenav-container class="sidenav-container" autosize>
+        <!-- Navigation Sidenav -->
+        <mat-sidenav class="sidenav" mode="side" [opened]="sidenavLayout">
+            <mat-nav-list>
+                <mat-list-item (click)="toggleSidenavText()" disableRipple>
+                    <mat-icon class="ml-auto">
+                        {{ expandedSidenav ? 'chevron_left' : 'chevron_right' }}
+                    </mat-icon>
+                </mat-list-item>
+                <mat-list-item
+                    *ngFor="let link of navLinks"
+                    [routerLink]="link.path"
+                    routerLinkActive="bg-accent"
+                >
+                    <mat-icon matListIcon>{{ link.icon }}</mat-icon>
+                    <h3 matLine *ngIf="expandedSidenav">{{ link.name }}</h3>
+                </mat-list-item>
+            </mat-nav-list>
+        </mat-sidenav>
+
+        <!-- Main Content -->
+        <mat-sidenav-content role="main">
+            <router-outlet></router-outlet>
+        </mat-sidenav-content>
+    </mat-sidenav-container>
+
+    <!-- Footer -->
+    <mat-toolbar color="primary">
+        <div class="lead m-auto">
+            <span class="d-flex align-items-center">
+                Built with
+                <mat-icon class="mx-1 text-warn">favorite</mat-icon>
+                by Skynet
+            </span>
+        </div>
+    </mat-toolbar>
+</div>

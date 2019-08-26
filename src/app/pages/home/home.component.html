@@ -1,0 +1,107 @@
+<div class="page-container">
+    <mat-card>
+        <mat-card-title>San Francisco Food Trucks</mat-card-title>
+        <mat-card-subtitle>
+            To start, enable access to your device location or click your
+            current position in the map.
+            <strong>
+                The Reset button will set the map location to San Francisco.
+            </strong>
+        </mat-card-subtitle>
+        <mat-card-subtitle>
+            <button mat-raised-button color="primary" (click)="reset()">
+                Reset
+            </button>
+            <span class="mx-2">Latitude: {{ lat }}, Longitude: {{ lng }}</span>
+            <mat-spinner
+                *ngIf="loading"
+                class="mx-2"
+                [diameter]="22"
+                [strokeWidth]="2"
+            ></mat-spinner>
+        </mat-card-subtitle>
+
+        <mat-card-content>
+            <agm-map
+                [latitude]="lat"
+                [longitude]="lng"
+                [(zoom)]="zoom"
+                [usePanning]="true"
+                (mapClick)="mapClicked($event)"
+            >
+                <ng-container *ngIf="markers$ | async as markers">
+                    <agm-marker
+                        *ngFor="let m of markers"
+                        (markerClick)="markerClicked(m)"
+                        [latitude]="m.latitude"
+                        [longitude]="m.longitude"
+                        [label]="m.label"
+                    >
+                        <agm-info-window [isOpen]="infoWindow === m.objectid">
+                            <strong>{{ m.applicant }}</strong>
+                            <p>{{ m.address }}</p>
+                        </agm-info-window>
+                    </agm-marker>
+                </ng-container>
+
+                <agm-circle
+                    *ngIf="radius"
+                    [latitude]="lat"
+                    [longitude]="lng"
+                    [radius]="radius"
+                    [clickable]="false"
+                    [fillColor]="'blue'"
+                    [fillOpacity]="0.2"
+                ></agm-circle>
+            </agm-map>
+
+            <ng-container *ngIf="markers$ | async as markers">
+                <div class="row">
+                    <div class="col-md-6 col-xl-4" *ngFor="let m of markers">
+                        <div
+                            (click)="markerClicked(m)"
+                            class="m-2 p-2 border border-secondary rounded {{
+                                m === selectedMarker ? 'bg-secondary' : ''
+                            }}"
+                        >
+                            <h5 class="card-title">
+                                {{ m.label }})
+                                {{ m.applicant }}
+                            </h5>
+                            <p>{{ m.address }}</p>
+                            <div>
+                                <strong>Food Items:</strong>
+                                {{ m.fooditems }}
+                            </div>
+                            <div>
+                                <strong>Latitude:</strong>
+                                {{ m.latitude }}
+                            </div>
+                            <div>
+                                <strong>Longitude:</strong>
+                                {{ m.longitude }}
+                            </div>
+                            <div>
+                                <strong>Distance:</strong>
+                                {{ m.miles }} miles
+                            </div>
+                            <div>
+                                <a
+                                    class="text-primary"
+                                    target="_blank"
+                                    href="https://www.google.com/maps/dir/?api=1&origin={{
+                                        lat
+                                    }},{{ lng }}&destination={{ m.latitude }},{{
+                                        m.longitude
+                                    }}"
+                                >
+                                    Click for Directions
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </ng-container>
+        </mat-card-content>
+    </mat-card>
+</div>

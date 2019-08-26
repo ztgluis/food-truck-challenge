@@ -1,0 +1,37 @@
+/* Resets */
+* {
+    a:hover,
+    a:active,
+    a:focus {
+        text-decoration: none;
+    }
+
+    &:active,
+    :focus {
+        outline: none !important;
+    }
+}
+
+label {
+    margin: 0;
+}
+
+html,
+body {
+    height: 100%;
+}
+
+.mat-card {
+    margin: 1em;
+}
+
+.mat-icon {
+    svg {
+        vertical-align: unset; // fix svg icons vertical align
+    }
+}
+
+// Ensure Google Maps info window is displayed correctly on dark themes
+.agm-info-window-content {
+    color: black;
+}

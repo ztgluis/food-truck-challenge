@@ -1,0 +1,119 @@
+@import '~@angular/material/theming';
+
+/**
+ * Example of Custom Palette
+ * Use a Material Palette generator such as:
+ * http://mcg.mbitson.com/
+ */
+
+$custom-pink: (
+    50: #f7e6f5,
+    100: #ebc1e6,
+    200: #dd98d5,
+    300: #cf6ec4,
+    400: #c54fb8,
+    500: #bb30ab,
+    600: #b52ba4,
+    700: #ac249a,
+    800: #a41e91,
+    900: #961380,
+    A100: #ffc9f5,
+    A200: #ff96ec,
+    A400: #ff63e3,
+    A700: #ff49de,
+    contrast: (
+        50: #000000,
+        100: #000000,
+        200: #000000,
+        300: #000000,
+        400: #ffffff,
+        500: #ffffff,
+        600: #ffffff,
+        700: #ffffff,
+        800: #ffffff,
+        900: #ffffff,
+        A100: #000000,
+        A200: #000000,
+        A400: #000000,
+        A700: #000000
+    )
+);
+
+$custom-green: (
+    50: #f5fcea,
+    100: #e5f7cb,
+    200: #d4f2a9,
+    300: #c2ed86,
+    400: #b5e96c,
+    500: #a8e552,
+    600: #a0e24b,
+    700: #97de41,
+    800: #8dda38,
+    900: #7dd328,
+    A100: #ffffff,
+    A200: #edffde,
+    A400: #d2ffab,
+    A700: #c5ff91,
+    contrast: (
+        50: #000000,
+        100: #000000,
+        200: #000000,
+        300: #000000,
+        400: #000000,
+        500: #000000,
+        600: #000000,
+        700: #000000,
+        800: #000000,
+        900: #000000,
+        A100: #000000,
+        A200: #000000,
+        A400: #000000,
+        A700: #000000
+    )
+);
+
+$custom-orange: (
+    50: #fcf1ea,
+    100: #f7ddcb,
+    200: #f2c6a9,
+    300: #edaf86,
+    400: #e99e6c,
+    500: #e58d52,
+    600: #e2854b,
+    700: #de7a41,
+    800: #da7038,
+    900: #d35d28,
+    A100: #ffffff,
+    A200: #ffe7de,
+    A400: #ffc3ab,
+    A700: #ffb191,
+    contrast: (
+        50: #000000,
+        100: #000000,
+        200: #000000,
+        300: #000000,
+        400: #000000,
+        500: #000000,
+        600: #000000,
+        700: #000000,
+        800: #000000,
+        900: #ffffff,
+        A100: #000000,
+        A200: #000000,
+        A400: #000000,
+        A700: #000000
+    )
+);
+
+$primary-palette: mat-palette($custom-pink);
+$accent-palette: mat-palette($custom-green);
+$warn-palette: mat-palette($custom-orange);
+
+$info-palette: mat-palette($mat-pink);
+$success-palette: mat-palette($mat-green);
+$neutral-palette: mat-palette($mat-blue-gray);
+$light-palette: mat-palette($mat-gray, 100);
+
+$theme: mat-light-theme($primary-palette, $accent-palette, $warn-palette);
+
+@import 'build-theme';
