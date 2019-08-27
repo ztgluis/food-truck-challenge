@@ -1,5 +1,6 @@
 import { MouseEvent } from '@agm/core';
 import { ChangeDetectorRef, Component } from '@angular/core';
+import { MediaChange, MediaObserver } from '@angular/flex-layout';
 import { SFDataService } from '@app/shared/services/sfdata.service';
 import { Observable, of } from 'rxjs';
 import { finalize, shareReplay, tap } from 'rxjs/operators';
@@ -28,10 +29,18 @@ export class HomeComponent {
     // Loading indicator while querying food truck details
     loading: boolean;
 
+    // Open sidenav
+    sidenavOpen: boolean;
+
     // Keep track of selected marker
     selectedMarker;
 
+    mediaObserver$: Observable<
+        MediaChange[]
+    > = this.mediaObserver.asObservable();
+
     constructor(
+        private mediaObserver: MediaObserver,
         private sfDataService: SFDataService,
         private cdRef: ChangeDetectorRef
     ) {
@@ -46,6 +55,7 @@ export class HomeComponent {
         this.lng = -122.42079955329393;
         this.zoom = 12;
         this.radius = 0;
+        this.sidenavOpen = false;
         this.markers$ = of([]);
     }
 
@@ -92,6 +102,7 @@ export class HomeComponent {
     findNearbyFoodTrucks() {
         // Start loading indicator
         this.loading = true;
+        this.sidenavOpen = true;
 
         // Build SoQL query string for Socrata API to return the 5 closest food trucks to a given location
         const params = {

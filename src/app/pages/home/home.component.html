@@ -1,126 +1,140 @@
-<div class="page-container">
-    <mat-card>
-        <mat-card-title>San Francisco Food Trucks</mat-card-title>
-        <mat-card-subtitle>
-            We'll find the five closest food trucks to you in San Francisco! To
-            start, enable access to your device location or click your current
-            position in the map.
-        </mat-card-subtitle>
-        <mat-card-subtitle>
-            <strong>
-                The Reset button will set the map to Initial State.
-            </strong>
-        </mat-card-subtitle>
-        <mat-card-subtitle class="">
-            <button
-                class="mx-2"
-                mat-raised-button
-                color="primary"
-                (click)="reset()"
-                matTooltip="Reset map to Initial State"
-            >
-                Reset
-            </button>
-            <button
-                class="mx-2"
-                mat-raised-button
-                color="primary"
-                (click)="findMe()"
-                matTooltip="Use location services to find your current location"
-            >
-                Find Me
-            </button>
-            <span class="mx-2">Latitude: {{ lat }}, Longitude: {{ lng }}</span>
-            <mat-spinner
-                *ngIf="loading"
-                class="mx-2"
-                [diameter]="22"
-                [strokeWidth]="2"
-            ></mat-spinner>
-        </mat-card-subtitle>
+<mat-drawer-container class="sidenav-container" autosize>
+    <mat-drawer
+        class="sidenav"
+        mode="side"
+        [opened]="sidenavOpen && mediaObserver.isActive('gt-sm')"
+    >
+        <mat-spinner
+            *ngIf="loading; else markerTemplate"
+            class="mx-auto my-5 d-block"
+            [diameter]="22"
+            [strokeWidth]="2"
+        ></mat-spinner>
+    </mat-drawer>
 
-        <mat-card-content>
-            <agm-map
-                [latitude]="lat"
-                [longitude]="lng"
-                [(zoom)]="zoom"
-                [usePanning]="true"
-                [clickableIcons]="false"
-                (mapClick)="mapClicked($event)"
-            >
-                <ng-container *ngIf="markers$ | async as markers">
-                    <agm-marker
-                        *ngFor="let m of markers"
-                        (markerClick)="markerClicked(m)"
-                        [latitude]="m.latitude"
-                        [longitude]="m.longitude"
-                        [label]="m.label"
+    <mat-drawer-content>
+        <div class="page-container">
+            <mat-card>
+                <mat-card-title>San Francisco Food Trucks</mat-card-title>
+                <mat-card-subtitle>
+                    We'll find the five closest food trucks to you in San
+                    Francisco! To start, enable access to your device location
+                    or click your current position in the map.
+                </mat-card-subtitle>
+                <mat-card-subtitle>
+                    <strong>
+                        The Reset button will set the map to Initial State.
+                    </strong>
+                </mat-card-subtitle>
+                <mat-card-subtitle class="">
+                    <button
+                        class="mx-2"
+                        mat-raised-button
+                        color="primary"
+                        (click)="reset()"
+                        matTooltip="Reset map to Initial State"
                     >
-                        <agm-info-window [isOpen]="infoWindow === m.objectid">
-                            <strong>{{ m.applicant }}</strong>
-                            <p>{{ m.address }}</p>
-                        </agm-info-window>
-                    </agm-marker>
-                </ng-container>
+                        Reset
+                    </button>
+                    <button
+                        class="mx-2"
+                        mat-raised-button
+                        color="primary"
+                        (click)="findMe()"
+                        matTooltip="Use location services to find your current location"
+                    >
+                        Find Me
+                    </button>
+                    <span class="mx-2">
+                        Latitude: {{ lat }}, Longitude: {{ lng }}
+                    </span>
+                    <mat-spinner
+                        *ngIf="loading"
+                        class="mx-2"
+                        [diameter]="22"
+                        [strokeWidth]="2"
+                    ></mat-spinner>
+                </mat-card-subtitle>
 
-                <agm-circle
-                    *ngIf="radius"
-                    [latitude]="lat"
-                    [longitude]="lng"
-                    [radius]="radius"
-                    [clickable]="false"
-                    [fillColor]="'blue'"
-                    [fillOpacity]="0.2"
-                ></agm-circle>
-            </agm-map>
+                <mat-card-content>
+                    <agm-map
+                        [latitude]="lat"
+                        [longitude]="lng"
+                        [(zoom)]="zoom"
+                        [usePanning]="true"
+                        [clickableIcons]="false"
+                        (mapClick)="mapClicked($event)"
+                    >
+                        <ng-container *ngIf="markers$ | async as markers">
+                            <agm-marker
+                                *ngFor="let m of markers"
+                                (markerClick)="markerClicked(m)"
+                                [latitude]="m.latitude"
+                                [longitude]="m.longitude"
+                                [label]="m.label"
+                            >
+                                <agm-info-window
+                                    [isOpen]="infoWindow === m.objectid"
+                                >
+                                    <strong>{{ m.applicant }}</strong>
+                                    <p>{{ m.address }}</p>
+                                </agm-info-window>
+                            </agm-marker>
+                        </ng-container>
 
-            <ng-container *ngIf="markers$ | async as markers">
-                <div class="row">
-                    <div class="col-md-6 col-xl-4" *ngFor="let m of markers">
-                        <div
-                            (click)="markerClicked(m)"
-                            class="m-2 p-2 border border-secondary rounded {{
-                                m === selectedMarker ? 'bg-secondary' : ''
+                        <agm-circle
+                            *ngIf="radius"
+                            [latitude]="lat"
+                            [longitude]="lng"
+                            [radius]="radius"
+                            [clickable]="false"
+                            [fillColor]="'blue'"
+                            [fillOpacity]="0.2"
+                        ></agm-circle>
+                    </agm-map>
+                </mat-card-content>
+            </mat-card>
+            <div
+                *ngIf="mediaObserver.isActive('lt-md'); then markerTemplate"
+            ></div>
+        </div>
+    </mat-drawer-content>
+</mat-drawer-container>
+
+<ng-template #markerTemplate>
+    <ng-container *ngIf="markers$ | async as markers">
+        <div *ngFor="let m of markers" class="sidenav">
+            <div
+                (click)="markerClicked(m)"
+                class="p-2 {{ m === selectedMarker ? 'bg-secondary' : '' }}"
+            >
+                <mat-card>
+                    <mat-card-title>
+                        {{ m.label }})
+                        {{ m.applicant }}
+                    </mat-card-title>
+                    <mat-card-subtitle>
+                        {{ m.address }}
+                    </mat-card-subtitle>
+                    <mat-card-content>
+                        <strong>Distance:</strong>
+                        {{ m.miles }} miles
+                    </mat-card-content>
+                    <mat-card-actions>
+                        <a
+                            class="text-primary"
+                            target="_blank"
+                            href="https://www.google.com/maps/dir/?api=1&origin={{
+                                lat
+                            }},{{ lng }}&destination={{ m.latitude }},{{
+                                m.longitude
                             }}"
                         >
-                            <h5 class="card-title">
-                                {{ m.label }})
-                                {{ m.applicant }}
-                            </h5>
-                            <p>{{ m.address }}</p>
-                            <div>
-                                <strong>Food Items:</strong>
-                                {{ m.fooditems }}
-                            </div>
-                            <div>
-                                <strong>Latitude:</strong>
-                                {{ m.latitude }}
-                            </div>
-                            <div>
-                                <strong>Longitude:</strong>
-                                {{ m.longitude }}
-                            </div>
-                            <div>
-                                <strong>Distance:</strong>
-                                {{ m.miles }} miles
-                            </div>
-                            <div>
-                                <a
-                                    class="text-primary"
-                                    target="_blank"
-                                    href="https://www.google.com/maps/dir/?api=1&origin={{
-                                        lat
-                                    }},{{ lng }}&destination={{ m.latitude }},{{
-                                        m.longitude
-                                    }}"
-                                >
-                                    Click for Directions
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </ng-container>
-        </mat-card-content>
-    </mat-card>
-</div>
+                            Click for Directions
+                        </a>
+                    </mat-card-actions>
+                </mat-card>
+            </div>
+        </div>
+    </ng-container>
+</ng-template>
