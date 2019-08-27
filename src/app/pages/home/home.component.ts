@@ -40,7 +40,7 @@ export class HomeComponent {
     > = this.mediaObserver.asObservable();
 
     constructor(
-        private mediaObserver: MediaObserver,
+        public mediaObserver: MediaObserver,
         private sfDataService: SFDataService,
         private cdRef: ChangeDetectorRef
     ) {
