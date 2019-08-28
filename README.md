@@ -27,11 +27,7 @@ Shared Module pattern is used for efficient import/export of dependencies to all
 Routing module has strict type checking of routes to ensure routes use proper title, description and an icon for mobile responsive display.
 Theming styling is built separately from structural styling to easily make changes when needed.
 
-Multiple themes are supported and lazy loaded into the app at runtime to keep network traffic minimal.
-
-Two layouts are supported for the navigation menu, the default navigation positions the menus in the top toolbar and the second layout positions them in a expandable sidenan panel.
-
-User preferences for Theme and Layout are persisted in LocalStorage for user convenience.
+Multiple themes are supported and lazy loaded into the app at runtime to keep network traffic minimal. User preference of Theme is persisted in LocalStorage for user convenience.
 
 Testing modules have been set up to minimize external dependencies and ensure reusable testing patterns.
 
@@ -123,6 +119,18 @@ Running `git commit` will initiate a pre-commit hook which will ensure code styl
 
 Running `git push` will initiate a CI/CD process which executes linting, testing, prod build and push prod build to GitHub Pages.
 
-# Roadmap
+#CI/CD
 
-Next step for this project is to include automated deployments to Azure, GCP and AWS as part of the CI/CD process.
+On pushing to Github, the following actions will happen in order, if any of them fail the process stops:
+
+1. Linting rules are run.
+2. Tests are run, process will stop if any fail or the 80% coverage threshold is not met.
+3. A production build will be started.
+4. A copy of the production build will be pushed to the `gh-pages` branch, effectively updating the demo page:
+   [https://ztgluis.github.io/food-truck-challenge/](https://ztgluis.github.io/food-truck-challenge/)
+
+After these steps, code will be pushed to Github and initiate a secondary CI/CD process:
+
+1. A Docker Hub hook that will build the docker image: `ztgluis/food-truck-challenge:latest`
+2. An Azure hook to Docker will re-deploy the web app:
+   [https://food-truck-challenge-container.azurewebsites.net](https://food-truck-challenge-container.azurewebsites.net)
