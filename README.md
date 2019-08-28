@@ -134,3 +134,5 @@ After these steps, code will be pushed to Github and initiate a secondary CI/CD 
 1. A Docker Hub hook that will build the docker image: `ztgluis/food-truck-challenge:latest`
 2. An Azure hook to Docker will re-deploy the web app:
    [https://food-truck-challenge-container.azurewebsites.net](https://food-truck-challenge-container.azurewebsites.net)
+3. A GCP hook to Docker will re-deploy the web app: [http://34.67.27.250](http://34.67.27.250)
+4. An AWS hook to Docker will re-deploy the web app: [http://52.14.192.5](http://52.14.192.5)
