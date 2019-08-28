@@ -4,7 +4,6 @@
     "private": true,
     "scripts": {
         "ng": "ng",
-        "preinstall": "rm -rf node_modules",
         "start": "ng serve",
         "build": "ng build",
         "build:prod": "ng build --prod",
