@@ -131,8 +131,9 @@ On pushing to Github, the following actions will happen in order, if any of them
 
 After these steps, code will be pushed to Github and initiate a secondary CI/CD process:
 
-1. A Docker Hub hook that will build the docker image: `ztgluis/food-truck-challenge:latest`
-2. An Azure hook to Docker will re-deploy the web app:
+1. An Azure Pipeline will start and lint, test, build the project to ensure its validity.
+1. On merging to `master` branch, a Docker Hub hook will build the docker image: `ztgluis/food-truck-challenge:latest`
+1. An Azure hook to Docker will re-deploy the web app:
    [https://food-truck-challenge-container.azurewebsites.net](https://food-truck-challenge-container.azurewebsites.net)
-3. A GCP hook to Docker will re-deploy the web app: [http://34.67.27.250](http://34.67.27.250)
-4. An AWS hook to Docker will re-deploy the web app: [http://52.14.192.5](http://52.14.192.5)
+1. A GCP hook to Docker will re-deploy the web app: [http://34.67.27.250](http://34.67.27.250)
+1. An AWS hook to Docker will re-deploy the web app: [http://52.14.192.5](http://52.14.192.5)
