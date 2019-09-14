@@ -2,11 +2,13 @@
 
 Coding challenge project aimed to help anyone find the 5 closest food trucks to them while in San Francisco.
 
-The home page of this project will load a map and try to access your device location for convenience centering the map near you.
+The home page of this project will load a map of San Francisco, click on the map to find the 5 closest food trucks.
+
+Optionally, you can click on the `Find Me` button to use your device location to center the map.
 
 The reset button in the home page will load the default values to center the map view to the San Francisco area.
 
-To find food trucks near you simply tap your location on the map.
+Click on a marker to see details of the food truck location.
 
 The About page describes the project and some of the Features + development decisions involved in the creation of this project.
 
@@ -22,9 +24,10 @@ All Angular modules and their components/services are lazy loaded for performanc
 
 Services are instantiated as Singleton services to ensure a consistent data flow between services and components.
 
-Shared Module pattern is used for efficient import/export of dependencies to all modules. Tree shaking enabled to keep bundles minimal and use only the dependencies each module needs.
+Shared Module pattern is used for efficient import/export of dependencies to all modules. Unused modules are tree shaked on a production build to keep bundles minimal and use only the dependencies each module needs.
 
 Routing module has strict type checking of routes to ensure routes use proper title, description and an icon for mobile responsive display.
+
 Theming styling is built separately from structural styling to easily make changes when needed.
 
 Multiple themes are supported and lazy loaded into the app at runtime to keep network traffic minimal. User preference of Theme is persisted in LocalStorage for user convenience.
@@ -51,7 +54,7 @@ Material theming capabilities are exceptional and paired with Bootstrap utilitie
 
 Angular Flex Layout is used to enable mobile responsive design.
 
-Depending on the viewport size, elements are effectively added or removed from the DOM, this keeps the DOM clean and organized while also boosting performance.
+Leveraging the MediaObserver, elements are effectively added or removed from the DOM, this keeps the DOM clean and organized while also boosting performance.
 
 ## Angular Google Maps
 
@@ -132,3 +135,4 @@ On pushing to Github, the following actions will happen in order, if any of them
 After these steps, code will be pushed to Github and initiate a secondary CI/CD process:
 
 1. A Docker Hub hook that will build the docker image: `ztgluis/food-truck-challenge:latest`
+2. On Pull Request opening, Github Actions will run the same rules as above (linting, testing, production build) as pre-merge checks.
