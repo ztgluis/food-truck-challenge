@@ -1,0 +1,243 @@
+(window["webpackJsonp"] = window["webpackJsonp"] || []).push([["pages-home-home-module"],{
+
+/***/ "./node_modules/raw-loader/dist/cjs.js!./src/app/pages/home/home.component.html":
+/*!**************************************************************************************!*\
+  !*** ./node_modules/raw-loader/dist/cjs.js!./src/app/pages/home/home.component.html ***!
+  \**************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = ("<mat-drawer-container class=\"sidenav-container\" autosize>\n    <mat-drawer\n        class=\"sidenav\"\n        mode=\"side\"\n        [opened]=\"sidenavOpen && mediaObserver.isActive('gt-sm')\"\n    >\n        <mat-spinner\n            *ngIf=\"loading; else markerTemplate\"\n            class=\"mx-auto my-5 d-block\"\n            [diameter]=\"22\"\n            [strokeWidth]=\"2\"\n        ></mat-spinner>\n    </mat-drawer>\n\n    <mat-drawer-content>\n        <div class=\"page-container\">\n            <mat-card>\n                <mat-card-title>San Francisco Food Trucks</mat-card-title>\n                <mat-card-subtitle>\n                    We'll find the five closest food trucks to you in San\n                    Francisco! To start, enable access to your device location\n                    or click your current position in the map.\n                </mat-card-subtitle>\n                <mat-card-subtitle>\n                    <strong>\n                        The Reset button will set the map to Initial State.\n                    </strong>\n                </mat-card-subtitle>\n                <mat-card-subtitle class=\"\">\n                    <button\n                        class=\"mx-2\"\n                        mat-raised-button\n                        color=\"primary\"\n                        (click)=\"reset()\"\n                        matTooltip=\"Reset map to Initial State\"\n                    >\n                        Reset\n                    </button>\n                    <button\n                        class=\"mx-2\"\n                        mat-raised-button\n                        color=\"primary\"\n                        (click)=\"findMe()\"\n                        matTooltip=\"Use location services to find your current location\"\n                    >\n                        Find Me\n                    </button>\n                    <span class=\"mx-2\">\n                        Latitude: {{ lat }}, Longitude: {{ lng }}\n                    </span>\n                    <mat-spinner\n                        *ngIf=\"loading\"\n                        class=\"mx-2\"\n                        [diameter]=\"22\"\n                        [strokeWidth]=\"2\"\n                    ></mat-spinner>\n                </mat-card-subtitle>\n\n                <mat-card-content>\n                    <agm-map\n                        [latitude]=\"lat\"\n                        [longitude]=\"lng\"\n                        [(zoom)]=\"zoom\"\n                        [usePanning]=\"true\"\n                        [clickableIcons]=\"false\"\n                        (mapClick)=\"mapClicked($event)\"\n                    >\n                        <ng-container *ngIf=\"markers$ | async as markers\">\n                            <agm-marker\n                                *ngFor=\"let m of markers\"\n                                (markerClick)=\"markerClicked(m)\"\n                                [latitude]=\"m.latitude\"\n                                [longitude]=\"m.longitude\"\n                                [label]=\"m.label\"\n                            >\n                                <agm-info-window\n                                    [isOpen]=\"infoWindow === m.objectid\"\n                                >\n                                    <strong>{{ m.applicant }}</strong>\n                                    <p>{{ m.address }}</p>\n                                </agm-info-window>\n                            </agm-marker>\n                        </ng-container>\n\n                        <agm-circle\n                            *ngIf=\"radius\"\n                            [latitude]=\"lat\"\n                            [longitude]=\"lng\"\n                            [radius]=\"radius\"\n                            [clickable]=\"false\"\n                            [fillColor]=\"'blue'\"\n                            [fillOpacity]=\"0.2\"\n                        ></agm-circle>\n                    </agm-map>\n                </mat-card-content>\n            </mat-card>\n            <div\n                *ngIf=\"mediaObserver.isActive('lt-md'); then markerTemplate\"\n            ></div>\n        </div>\n    </mat-drawer-content>\n</mat-drawer-container>\n\n<ng-template #markerTemplate>\n    <ng-container *ngIf=\"markers$ | async as markers\">\n        <div *ngFor=\"let m of markers\" class=\"sidenav\">\n            <div\n                (click)=\"markerClicked(m)\"\n                class=\"p-2 {{ m === selectedMarker ? 'bg-secondary' : '' }}\"\n            >\n                <mat-card>\n                    <mat-card-title>\n                        {{ m.label }})\n                        {{ m.applicant }}\n                    </mat-card-title>\n                    <mat-card-subtitle>\n                        {{ m.address }}\n                    </mat-card-subtitle>\n                    <mat-card-content>\n                        <strong>Distance:</strong>\n                        {{ m.miles }} miles\n                    </mat-card-content>\n                    <mat-card-actions>\n                        <a\n                            class=\"text-primary\"\n                            target=\"_blank\"\n                            href=\"https://www.google.com/maps/dir/?api=1&origin={{\n                                lat\n                            }},{{ lng }}&destination={{ m.latitude }},{{\n                                m.longitude\n                            }}\"\n                        >\n                            Click for Directions\n                        </a>\n                    </mat-card-actions>\n                </mat-card>\n            </div>\n        </div>\n    </ng-container>\n</ng-template>\n");
+
+/***/ }),
+
+/***/ "./src/app/pages/home/home.component.scss":
+/*!************************************************!*\
+  !*** ./src/app/pages/home/home.component.scss ***!
+  \************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = (":host {\n  display: flex;\n  flex: 1;\n}\n\n.page-container {\n  margin: 1em 0;\n}\n\nagm-map {\n  height: 600px;\n}\n\n.mat-progress-spinner {\n  display: inline-block;\n  vertical-align: middle;\n}\n\nmat-drawer-container {\n  flex: 1;\n}\n\nmat-drawer-container mat-drawer.sidenav {\n  width: 300px;\n}\n\n.sidenav mat-card {\n  margin: 0.5em;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi9Vc2Vycy9sdWlzL2Rldi9mb29kLXRydWNrLWNoYWxsZW5nZS9zcmMvYXBwL3BhZ2VzL2hvbWUvaG9tZS5jb21wb25lbnQuc2NzcyIsInNyYy9hcHAvcGFnZXMvaG9tZS9ob21lLmNvbXBvbmVudC5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0ksYUFBQTtFQUNBLE9BQUE7QUNDSjs7QURFQTtFQUNJLGFBQUE7QUNDSjs7QURHQTtFQUNJLGFBQUE7QUNBSjs7QURHQTtFQUNJLHFCQUFBO0VBQ0Esc0JBQUE7QUNBSjs7QURHQTtFQUNJLE9BQUE7QUNBSjs7QURDSTtFQUNJLFlBQUE7QUNDUjs7QURJSTtFQUNJLGFBQUE7QUNEUiIsImZpbGUiOiJzcmMvYXBwL3BhZ2VzL2hvbWUvaG9tZS5jb21wb25lbnQuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbIjpob3N0IHtcbiAgICBkaXNwbGF5OiBmbGV4O1xuICAgIGZsZXg6IDE7XG59XG5cbi5wYWdlLWNvbnRhaW5lciB7XG4gICAgbWFyZ2luOiAxZW0gMDtcbiAgICAvLyBoZWlnaHQ6IDEwMCU7XG59XG5cbmFnbS1tYXAge1xuICAgIGhlaWdodDogNjAwcHg7XG59XG5cbi5tYXQtcHJvZ3Jlc3Mtc3Bpbm5lciB7XG4gICAgZGlzcGxheTogaW5saW5lLWJsb2NrO1xuICAgIHZlcnRpY2FsLWFsaWduOiBtaWRkbGU7XG59XG5cbm1hdC1kcmF3ZXItY29udGFpbmVyIHtcbiAgICBmbGV4OiAxO1xuICAgIG1hdC1kcmF3ZXIuc2lkZW5hdiB7XG4gICAgICAgIHdpZHRoOiAzMDBweDtcbiAgICB9XG59XG5cbi5zaWRlbmF2IHtcbiAgICBtYXQtY2FyZCB7XG4gICAgICAgIG1hcmdpbjogMC41ZW07XG4gICAgfVxufVxuIiwiOmhvc3Qge1xuICBkaXNwbGF5OiBmbGV4O1xuICBmbGV4OiAxO1xufVxuXG4ucGFnZS1jb250YWluZXIge1xuICBtYXJnaW46IDFlbSAwO1xufVxuXG5hZ20tbWFwIHtcbiAgaGVpZ2h0OiA2MDBweDtcbn1cblxuLm1hdC1wcm9ncmVzcy1zcGlubmVyIHtcbiAgZGlzcGxheTogaW5saW5lLWJsb2NrO1xuICB2ZXJ0aWNhbC1hbGlnbjogbWlkZGxlO1xufVxuXG5tYXQtZHJhd2VyLWNvbnRhaW5lciB7XG4gIGZsZXg6IDE7XG59XG5tYXQtZHJhd2VyLWNvbnRhaW5lciBtYXQtZHJhd2VyLnNpZGVuYXYge1xuICB3aWR0aDogMzAwcHg7XG59XG5cbi5zaWRlbmF2IG1hdC1jYXJkIHtcbiAgbWFyZ2luOiAwLjVlbTtcbn0iXX0= */");
+
+/***/ }),
+
+/***/ "./src/app/pages/home/home.component.ts":
+/*!**********************************************!*\
+  !*** ./src/app/pages/home/home.component.ts ***!
+  \**********************************************/
+/*! exports provided: HomeComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "HomeComponent", function() { return HomeComponent; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
+/* harmony import */ var _angular_flex_layout__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/flex-layout */ "./node_modules/@angular/flex-layout/esm2015/flex-layout.js");
+/* harmony import */ var _app_shared_services_sfdata_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @app/shared/services/sfdata.service */ "./src/app/shared/services/sfdata.service.ts");
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! rxjs */ "./node_modules/rxjs/_esm2015/index.js");
+/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm2015/operators/index.js");
+
+
+
+
+
+
+let HomeComponent = class HomeComponent {
+    constructor(mediaObserver, sfDataService, cdRef) {
+        this.mediaObserver = mediaObserver;
+        this.sfDataService = sfDataService;
+        this.cdRef = cdRef;
+        this.mediaObserver$ = this.mediaObserver.asObservable();
+        // initialize map values
+        this.reset();
+    }
+    // resets map values to initial defaults
+    reset() {
+        // San Francisco latitude/longitude
+        this.lat = 37.75923216518026;
+        this.lng = -122.42079955329393;
+        this.zoom = 12;
+        this.radius = 0;
+        this.sidenavOpen = false;
+        this.markers$ = Object(rxjs__WEBPACK_IMPORTED_MODULE_4__["of"])([]);
+    }
+    // Runs on selection of a map marker
+    markerClicked(marker) {
+        // Sets the marker as selected/unselected
+        if (this.selectedMarker === marker) {
+            this.selectedMarker = null;
+            this.infoWindow = null;
+        }
+        else {
+            this.selectedMarker = marker;
+            this.infoWindow = marker.objectid;
+        }
+    }
+    // Runs on map click
+    mapClicked($event) {
+        // Resets values
+        this.selectedMarker = null;
+        this.radius = 0;
+        // Update location based on map click location
+        this.lat = $event.coords.lat;
+        this.lng = $event.coords.lng;
+        // Find food trucks based on new latitude/longitude
+        this.findNearbyFoodTrucks();
+    }
+    // Use Device location as initial map location
+    findMe() {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(position => {
+                this.lat = position.coords.latitude;
+                this.lng = position.coords.longitude;
+                this.cdRef.detectChanges();
+            });
+        }
+        else {
+            alert('Geolocation is not supported by this browser.');
+        }
+    }
+    // Finds the five closest food trucks for the current latitude/longitude
+    findNearbyFoodTrucks() {
+        // Start loading indicator
+        this.loading = true;
+        this.sidenavOpen = true;
+        // Build SoQL query string for Socrata API to return the 5 closest food trucks to a given location
+        const params = {
+            // Order results based on proximity to current latitude/longitude
+            $order: `distance_in_meters(location, 'POINT (${this.lng} ${this.lat})')`,
+            // Limit to 5 results (5 closest to given location)
+            $limit: 5,
+            // Add `range` field to response for later use
+            $select: `*, distance_in_meters(location, 'POINT (${this.lng} ${this.lat})') AS range`
+        };
+        this.markers$ = this.sfDataService.getFoodTruckData(params).pipe(
+        // Prevent unnecessary repeated requests
+        Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["shareReplay"])(1), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["tap"])(data => {
+            data.forEach((m, i) => {
+                // Zoom in to selected area
+                this.zoom = 14;
+                // Set marker label to a uppercase letter based on the index (index `0` = label `A`)
+                m.label = String.fromCharCode(65 + i);
+                // Set circle area radius to the furthest food truck found (add padding for map visual)
+                const radius = Number(m.range) + 20;
+                if (radius > this.radius) {
+                    this.radius = radius;
+                }
+                // Divide by 1609.344 to convert to miles
+                m.miles = (parseFloat(m.range) / 1609.34).toFixed(3);
+            });
+        }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["finalize"])(() => {
+            // Stop loading indicator
+            this.loading = false;
+        }));
+    }
+};
+HomeComponent.ctorParameters = () => [
+    { type: _angular_flex_layout__WEBPACK_IMPORTED_MODULE_2__["MediaObserver"] },
+    { type: _app_shared_services_sfdata_service__WEBPACK_IMPORTED_MODULE_3__["SFDataService"] },
+    { type: _angular_core__WEBPACK_IMPORTED_MODULE_1__["ChangeDetectorRef"] }
+];
+HomeComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
+        selector: 'ftc-home',
+        template: tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! raw-loader!./home.component.html */ "./node_modules/raw-loader/dist/cjs.js!./src/app/pages/home/home.component.html")).default,
+        styles: [tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! ./home.component.scss */ "./src/app/pages/home/home.component.scss")).default]
+    }),
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_flex_layout__WEBPACK_IMPORTED_MODULE_2__["MediaObserver"],
+        _app_shared_services_sfdata_service__WEBPACK_IMPORTED_MODULE_3__["SFDataService"],
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ChangeDetectorRef"]])
+], HomeComponent);
+
+
+
+/***/ }),
+
+/***/ "./src/app/pages/home/home.module.ts":
+/*!*******************************************!*\
+  !*** ./src/app/pages/home/home.module.ts ***!
+  \*******************************************/
+/*! exports provided: HomeModule */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "HomeModule", function() { return HomeModule; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm2015/router.js");
+/* harmony import */ var _app_shared__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @app/shared */ "./src/app/shared/index.ts");
+/* harmony import */ var _home_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./home.component */ "./src/app/pages/home/home.component.ts");
+
+
+
+
+
+let HomeModule = class HomeModule {
+};
+HomeModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["NgModule"])({
+        imports: [
+            _app_shared__WEBPACK_IMPORTED_MODULE_3__["SharedModule"],
+            _angular_router__WEBPACK_IMPORTED_MODULE_2__["RouterModule"].forChild([
+                {
+                    path: '',
+                    component: _home_component__WEBPACK_IMPORTED_MODULE_4__["HomeComponent"]
+                }
+            ])
+        ],
+        declarations: [_home_component__WEBPACK_IMPORTED_MODULE_4__["HomeComponent"]]
+    })
+], HomeModule);
+
+
+
+/***/ }),
+
+/***/ "./src/app/shared/services/sfdata.service.ts":
+/*!***************************************************!*\
+  !*** ./src/app/shared/services/sfdata.service.ts ***!
+  \***************************************************/
+/*! exports provided: SFDataService */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SFDataService", function() { return SFDataService; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm2015/http.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
+
+
+
+let SFDataService = class SFDataService {
+    constructor(http) {
+        this.http = http;
+        this.dataUrl = 'https://data.sfgov.org/resource/rqzj-sfat.json';
+    }
+    getFoodTruckData(params) {
+        return this.http.get(this.dataUrl, { params });
+    }
+};
+SFDataService.ctorParameters = () => [
+    { type: _angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpClient"] }
+];
+SFDataService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["Injectable"])({
+        providedIn: 'root'
+    }),
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpClient"]])
+], SFDataService);
+
+
+
+/***/ })
+
+}]);
+//# sourceMappingURL=pages-home-home-module-es2015.js.map
