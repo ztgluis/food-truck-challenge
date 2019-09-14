@@ -86,22 +86,9 @@ describe('HomeComponent', () => {
 
     describe('#findMe', () => {
         it('should succeed getting user location', async(() => {
-            spyOn(navigator.geolocation, 'getCurrentPosition').and.callFake(
-                () => {
-                    return {
-                        coords: { latitude: 32.8569, longitude: -96.9628 }
-                    };
-                }
-            );
+            spyOn(navigator.geolocation, 'getCurrentPosition');
             component.findMe();
-            expect(component.lat).toEqual(37.75923216518026);
+            expect(navigator.geolocation.getCurrentPosition).toHaveBeenCalled();
         }));
-        // it('should fail getting user location', async(() => {
-        //     spyOn(navigator.geolocation, 'getCurrentPosition').and.throwError(
-        //         'undefined'
-        //     );
-        //     component.findMe();
-        //     expect(component.lat).toEqual(37.75923216518026);
-        // }));
     });
 });
