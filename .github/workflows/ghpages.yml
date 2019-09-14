@@ -19,4 +19,4 @@ jobs:
     - name: npm install
       run: npm install
     - name: ghpages
-      run: npm run ghpages
+      run: npm run gh-pages
