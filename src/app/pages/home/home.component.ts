@@ -1,4 +1,3 @@
-import { MouseEvent } from '@agm/core';
 import { ChangeDetectorRef, Component } from '@angular/core';
 import { MediaChange, MediaObserver } from '@angular/flex-layout';
 import { SFDataService } from '@app/shared/services/sfdata.service';
@@ -72,14 +71,14 @@ export class HomeComponent {
     }
 
     // Runs on map click
-    mapClicked($event: MouseEvent) {
+    mapClicked($event: google.maps.MouseEvent | google.maps.IconMouseEvent) {
         // Resets values
         this.selectedMarker = null;
         this.radius = 0;
 
         // Update location based on map click location
-        this.lat = $event.coords.lat;
-        this.lng = $event.coords.lng;
+        this.lat = $event.latLng.lat();
+        this.lng = $event.latLng.lng();
 
         // Find food trucks based on new latitude/longitude
         this.findNearbyFoodTrucks();
