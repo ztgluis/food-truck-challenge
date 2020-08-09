@@ -60,15 +60,15 @@ describe('HomeComponent', () => {
 
     describe('#mapClicked()', () => {
         const event = {
-            coords: {
-                lat: 32,
-                lng: -122
+            latLng: {
+                lat: () => 32,
+                lng: () => -122
             }
         };
         it('should set the coordinates from the map click event', async(() => {
             component.mapClicked(event);
-            expect(component.lat).toEqual(event.coords.lat);
-            expect(component.lng).toEqual(event.coords.lng);
+            expect(component.lat).toEqual(event.latLng.lat());
+            expect(component.lng).toEqual(event.latLng.lng());
         }));
         it('should call findNearbyFoodTrucks', async(() => {
             component.mapClicked(event);

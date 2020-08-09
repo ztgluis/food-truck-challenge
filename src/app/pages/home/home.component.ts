@@ -71,7 +71,7 @@ export class HomeComponent {
     }
 
     // Runs on map click
-    mapClicked($event: google.maps.MouseEvent | google.maps.IconMouseEvent) {
+    mapClicked($event) {
         // Resets values
         this.selectedMarker = null;
         this.radius = 0;
