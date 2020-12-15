@@ -12,7 +12,7 @@ COPY . /app
 
 RUN npm run build:prod -- --output-path=dist
 
-FROM nginx:1.19.5-alpine
+FROM nginx:1.19.6-alpine
 
 COPY --from=build /app/dist /usr/share/nginx/html
 
